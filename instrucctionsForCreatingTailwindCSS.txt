@@ -1,0 +1,104 @@
+1. Instalar Node.js
+
+Tailwind CSS utiliza Node.js para manejar las dependencias, así que primero necesitamos instalarlo.
+
+    Ve al sitio oficial de Node.js: https://nodejs.org.
+    Descarga la versión LTS (recomendada para la mayoría de los proyectos).
+    Instálalo siguiendo las instrucciones de tu sistema operativo.
+
+    Nota: Al instalar Node.js, también se instala npm (Node Package Manager), que usaremos para manejar las dependencias.
+
+2. Crear tu proyecto y configurar Node.js
+
+    Abre una terminal y crea una carpeta para tu proyecto:
+
+    mkdir mi-proyecto-tailwind
+    cd mi-proyecto-tailwind
+
+Inicializa un archivo package.json (este archivo gestionará tus dependencias):
+
+    npm init -y
+
+3. Instalar Tailwind CSS
+
+    Instala Tailwind CSS y otras herramientas necesarias:
+
+    npm install -D tailwindcss postcss autoprefixer
+
+Genera el archivo de configuración de Tailwind CSS:
+
+    npx tailwindcss init
+
+    Esto creará un archivo tailwind.config.js en tu proyecto.
+
+4. Configurar Tailwind CSS
+
+    Abre el archivo tailwind.config.js y configura las rutas donde se encuentran tus archivos HTML (o cualquier archivo donde usarás las clases de Tailwind).
+
+    Por ejemplo, si tus archivos HTML están en una carpeta llamada src:
+
+    module.exports = {
+    content: ["./src/**/*.{html,js}"],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+    };
+
+Crea un archivo CSS de entrada (por ejemplo, en src/input.css):
+
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+5. Generar el CSS
+
+    Usa Tailwind CSS para generar el archivo CSS a partir de tu archivo de entrada:
+
+    Desarrollo (sin comprimir):
+
+    npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+
+    -i: Archivo de entrada (input).
+    -o: Archivo de salida (output).
+    --watch: Monitorea cambios en tiempo real.
+
+Abre tu archivo HTML y enlaza el CSS generado (dist/output.css):
+
+    <link href="./dist/output.css" rel="stylesheet">
+
+6. Comprimir el CSS para Producción
+
+    Usa el siguiente comando para generar un archivo CSS comprimido para producción:
+
+    NODE_ENV=production npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify
+
+    Esto generará un archivo CSS más pequeño y optimizado para ser usado en producción.
+
+7. Estructura final del proyecto
+
+Después de seguir los pasos, tu estructura de archivos debería lucir así:
+
+mi-proyecto-tailwind/
+├── dist/
+│   └── output.css  <-- Archivo CSS generado
+├── src/
+│   ├── input.css   <-- Archivo CSS de entrada
+│   └── index.html  <-- Tu archivo HTML
+├── node_modules/   <-- Manejada por npm
+├── package.json    <-- Configuración de dependencias
+└── tailwind.config.js <-- Configuración de Tailwind
+
+8. (Opcional) Automatizar con un script de package.json
+
+Para no tener que escribir el comando largo cada vez, puedes agregar un script en tu archivo package.json:
+
+"scripts": {
+  "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+  "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+}
+
+Luego, en la terminal, puedes usar:
+
+    npm run watch: Para desarrollo (sin comprimir, con monitoreo).
+    npm run build: Para producción (comprimido).
