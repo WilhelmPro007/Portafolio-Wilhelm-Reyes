@@ -1,0 +1,29 @@
+# Initialize Tailwind CSS
+npx tailwindcss init
+
+# Create input.css with Tailwind directives
+echo "@tailwind base;\n@tailwind components;\n@tailwind utilities;" > input.css
+
+# Update tailwind.config.js to include paths to your HTML files
+echo "/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './*.html', // Adjust this path according to the location of your HTML files
+    './path/to/your/html/files/**/*.html', // Add more paths if needed
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'text': '#cdcffe',
+        'background': '#010428',
+        'primary': '#777efd',
+        'secondary': '#9c0297',
+        'accent': '#fc1db1',
+      },
+    },
+  },
+  plugins: [],
+};" > tailwind.config.js
+
+# Build the CSS file
+npx tailwindcss -i ./input.css -o ./dist/output.css --watch
