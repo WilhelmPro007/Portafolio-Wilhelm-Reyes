@@ -5,13 +5,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        'text': '#cdcffe',
-        'background': '#010428',
-        'primary': '#777efd',
-        'secondary': '#9c0297',
-        'accent': '#fc1db1',
-      },
+      colors: {             // Collors from realtimecolors.com https://www.realtimecolors.com/?colors=eaeffa-03060c-86afe4-231b7e-693fd5&fonts=Inter-Inter
+        'text': '#eaeffa',
+        'background': '#03060c',
+        'primary': '#86afe4',
+        'secondary': '#231b7e',
+        'accent': '#693fd5',
+       },
+       
     },
   },
   plugins: [],
